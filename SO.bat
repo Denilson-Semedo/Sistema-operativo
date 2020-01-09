@@ -1,4 +1,48 @@
 @echo off
+pause > nul
+::inicialização
+:inicio
+start /b gplay Microsoft.Mp3>nul 2>nul
+sleep 400                                                                                         
+echo                                     ```....```                                                     
+echo                               `.-:/++++++++++++/:-.                                                
+echo                             .+++++++++++++++++++++++:.                                             
+echo                             /+++++++++++++++++++++++++`                                            
+echo                            .+++++++++++++++++++++++++-   .:.                                       
+echo                            /+++++++++++++++++++++++++`   /++/:-.`            `..-:/                
+echo                           -+++++++++++++++++++++++++.   -++++++++//::---::///+++++-                
+echo                          `+++++++++++++++++++++++++/   `+++++++++++++++++++++++++/                 
+echo                          :+++++++++++++++++++++++++.   :+++++++++++++++++++++++++.                 
+echo                         .+++++++++++++++++++++++++:   .+++++++++++++++++++++++++:                  
+echo                         /+++++++++++++++++++++++++`   /+++++++++++++++++++++++++`                  
+echo                        -+++++++++++++++++++++++++-   -+++++++++++++++++++++++++-                   
+echo                       `/++///:-..`````..-:/+++++/   `/++++++++++++++++++++++++/`                   
+echo                       .-.``               ``-:/+.   :+++++++++++++++++++++++++.                    
+echo                         ...-:///+++//::-.`    `.   `+++++++++++++++++++++++++/                     
+echo                      -:/+oooooooooooooooo+/:.`     ./++++++++++++++++++++++++.                     
+echo                     .oooooooooooooooooooooooo+-     `.:/+++++++++++++++++//:.                      
+echo                     +oooooooooooooooooooooooo+.`      ``.-::////////::-.``                         
+echo                    -ooooooooooooooooooooooooo:   .::-.                    .:                       
+echo                   `+oooooooooooooooooooooooo+`   :::::::--.::::::::...---::-                        
+echo                   :ooooooooooooooooooooooooo-   .:::::::::::::::::::::::::`                        
+echo                  `ooooooooooooooooooooooooo+   `:::::::::::::::::::::::::-                         
+echo                  /ooooooooooooooooooooooooo.   -:::::::::::::::::::::::::`                         
+echo                 .ooooooooooooooooooooooooo/   `:::::::::::::::::::::::::.                          
+echo                 /ooooooooooooooooooooooooo`   -:::::::::::::::::::::::::`                          
+echo                -oooooo++++////++ooooooooo:   .:::::::::::::::::::::::::.                           
+echo                +/:-..``         `.-/+ooo+`   :::::::::::::::::::::::::-                            
+echo                                      .-/-   .:::::::::::::::::::::::::`                            
+echo                                            `:::::::::::::::::::::::::-                             
+echo                                             `.-:::::::::::::::::::::-`                             
+echo                                                `..-:::::::::::--..`
+::codigo para fazer o efeito de imagen piscando                                
+for /l %%i in (1 1 5) do (
+color 07
+sleep 300
+color 01
+sleep 300 )
+color 07
+::#############################################
 :menu
 cls
 echo Menu
@@ -63,9 +107,9 @@ if %op1% == 1 (
 )
 if %op1% == 4 (
     TASKLIST /FI "STATUS EQ RUNNING"
-    set /p x= Qual processo desejas matar? 
+    set /p x=Qual processo desejas matar? 
 	set /a x1=%x%
-   TASKKILL/F /IM %x1%
+     TASKKILL /F /IM %x% /T
     pause  
     goto :meges
 )
@@ -82,6 +126,7 @@ if %op1% lss 1 (
 	call :pisca
     goto :meges
 )
+::Gestão de memória
 :meme
 cls
 echo Gestao de memoria
@@ -161,7 +206,8 @@ if %op2% lss 1 (
 	    call :pisca
         goto :terminal
     )
-    :def
+::Definicões onde somente o administrador tem acesso
+:def
 cls
 echo DEFINICOES
 echo 1 - Trocar Password
@@ -188,6 +234,7 @@ if %opd% gtr 3 (
     goto :def
 	
 )
+::codigo para fazer o efeito de pisca
 :pisca
 for /l %%i in (1 1 3) do (
 color 0A

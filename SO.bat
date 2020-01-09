@@ -53,10 +53,10 @@ echo 4 - Definicoes(*)
 echo 5 - Sair
 set /p op=
 if %op% == 1 (
-    goto :meges
+    goto :gesprocessos
 )
 if %op% == 2 (
-    goto :meme
+    goto :gesmemoria
 )
 if %op% == 3 (
    goto :terminal 
@@ -91,7 +91,8 @@ if %op% lss 1 (
 	call :pisca
     goto :menu
 )
-:meges
+::Gestao de Processos
+:gesprocessos
 cls
 echo Gestao de processo
 echo 1 - Processos ativos
@@ -101,9 +102,14 @@ echo 4 - Matar um Processos
 echo 5 - Voltar para o menu principal
 set /p op1= 
 if %op1% == 1 (
+<<<<<<< HEAD
+
+    goto :gesprocessos
+=======
     TASKLIST /FI "STATUS EQ RUNNING"
     pause
     goto :meges
+>>>>>>> e996144c47723d4f13cd8e886e2cfb6619ebdc85
 )
 if %op1% == 4 (
     TASKLIST /FI "STATUS EQ RUNNING"
@@ -111,7 +117,7 @@ if %op1% == 4 (
 	set /a x1=%x%
      TASKKILL /F /IM %x% /T
     pause  
-    goto :meges
+    goto :gesprocessos
 )
 if %op1% == 5 (
     goto :menu
@@ -119,15 +125,19 @@ if %op1% == 5 (
 if %op1% gtr 5 (
 	start /b gplay wrong.mp3>nul 2>nul
 	call :pisca
-    goto :meges
+    goto :gesprocessos
 )
 if %op1% lss 1 (
     start /b gplay wrong.mp3>nul 2>nul
 	call :pisca
-    goto :meges
+    goto :gesprocessos
 )
+<<<<<<< HEAD
+:gesmemoria
+=======
 ::Gestão de memória
 :meme
+>>>>>>> e996144c47723d4f13cd8e886e2cfb6619ebdc85
 cls
 echo Gestao de memoria
 echo 1 - total de memoria
@@ -138,21 +148,15 @@ set /p op2=
 
 if %op2% == 1 (
     cls
-
-    pause > nul
-    goto :meme
+    goto :memoriatotal
 )
 if %op2% == 2 (
     cls
-
-    pause > nul
-    goto :meme
+    goto :memoriaemuso
 )
 if %op2% == 3 (
     cls
-
-    pause > nul
-    goto :meme
+    goto :memoriadisponivel
 )
 if %op2% == 4 (
     goto :menu
@@ -160,13 +164,34 @@ if %op2% == 4 (
 if %op2% gtr 4 (
     start /b gplay wrong.mp3>nul 2>nul
 	call :pisca
-    goto :meme
+    goto :gesmemoria
 )
 if %op2% lss 1 (
     start /b gplay wrong.mp3>nul 2>nul
 	call :pisca
-    goto :meme
+    goto :gesmemoria
 )
+::Memoria Total
+:memoriatotal
+for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Memory"') do set RAM_SIZE=%%i%%j
+echo Memoria total: %RAM_SIZE%
+pause > nul
+goto :gesmemoria
+::Memoria Em uso
+:memoriaemuso
+for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
+echo Memoria disponivel: %RAM_DIS%
+pause > nul
+goto :gesmemoria
+::Memoria Disponivel
+:memoriadisponivel
+for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Memory"') do set RAM_SIZE=%%i%%j
+for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
+set /a RAM_USE=RAM_SIZE-RAM_DIS
+echo Memoria em uso: %RAM_USE%
+pause > nul
+goto :gesmemoria
+::Terminal
 :terminal
     cls
     echo 1 - Powershell(*)

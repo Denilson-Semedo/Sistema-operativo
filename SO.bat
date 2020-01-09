@@ -57,11 +57,15 @@ echo 4 - Matar um Processos
 echo 5 - Voltar para o menu principal
 set /p op1= 
 if %op1% == 1 (
-
+    TASKLIST /FI "STATUS EQ RUNNING"
+    pause
     goto :meges
 )
 if %op1% == 4 (
-
+    TASKLIST /FI "STATUS EQ RUNNING"
+    set /p x= Qual processo desejas matar? 
+	set /a x1=%x%
+   TASKKILL/F /IM %x1%
     pause  
     goto :meges
 )

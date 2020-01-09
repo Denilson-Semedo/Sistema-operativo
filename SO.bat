@@ -102,14 +102,12 @@ echo 4 - Matar um Processos
 echo 5 - Voltar para o menu principal
 set /p op1= 
 if %op1% == 1 (
-<<<<<<< HEAD
 
     goto :gesprocessos
 =======
     TASKLIST /FI "STATUS EQ RUNNING"
     pause
     goto :meges
->>>>>>> e996144c47723d4f13cd8e886e2cfb6619ebdc85
 )
 if %op1% == 4 (
     TASKLIST /FI "STATUS EQ RUNNING"
@@ -132,12 +130,10 @@ if %op1% lss 1 (
 	call :pisca
     goto :gesprocessos
 )
-<<<<<<< HEAD
 :gesmemoria
 =======
 ::Gestão de memória
 :meme
->>>>>>> e996144c47723d4f13cd8e886e2cfb6619ebdc85
 cls
 echo Gestao de memoria
 echo 1 - total de memoria

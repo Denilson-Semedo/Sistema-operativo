@@ -2,43 +2,53 @@
 pause > nul
 ::inicialização
 :inicio
+set /p admin1name=<admini1name.txt
+set /a admin1pass=9453
+set /a normal=0
+set /a administrador=1
 set /a som=0
 if %som%==0 (
     ::Reproduz o ficheiro .mp3 que se encontra na mesma pasta que o codigo
     start /b gplay Microsoft.mp3>nul 2>nul
 )
-sleep 400                                                                                         
-echo                                         ```....```                                                     
-echo                                   `.-:/++++++++++++/:-.                                                
-echo                                 .+++++++++++++++++++++++:.                                             
-echo                                 /+++++++++++++++++++++++++`                                            
-echo                                .+++++++++++++++++++++++++-   .:.                                       
-echo                                /+++++++++++++++++++++++++`   /++/:-.`            `..-:/                
-echo                               -+++++++++++++++++++++++++.   -++++++++//::---::///+++++-                
-echo                              `+++++++++++++++++++++++++/   `+++++++++++++++++++++++++/                 
-echo                              :+++++++++++++++++++++++++.   :+++++++++++++++++++++++++.                 
-echo                             .+++++++++++++++++++++++++:   .+++++++++++++++++++++++++:                  
-echo                             /+++++++++++++++++++++++++`   /+++++++++++++++++++++++++`                  
-echo                            -+++++++++++++++++++++++++-   -+++++++++++++++++++++++++-                   
-echo                           `/++///:-..`````..-:/+++++/   `/++++++++++++++++++++++++/`                   
-echo                           .-.``               ``-:/+.   :+++++++++++++++++++++++++.                    
-echo                             ...-:///+++//::-.`    `.   `+++++++++++++++++++++++++/                     
-echo                          -:/+oooooooooooooooo+/:.`     ./++++++++++++++++++++++++.                     
-echo                         .oooooooooooooooooooooooo+-     `.:/+++++++++++++++++//:.                      
-echo                         +oooooooooooooooooooooooo+.`      ``.-::////////::-.``                         
-echo                        -ooooooooooooooooooooooooo:   .::-.                    .:                       
-echo                       `+oooooooooooooooooooooooo+`   :::::::--.::::::::...---::-                        
-echo                       :ooooooooooooooooooooooooo-   .:::::::::::::::::::::::::`                        
-echo                      `ooooooooooooooooooooooooo+   `:::::::::::::::::::::::::-                         
-echo                      /ooooooooooooooooooooooooo.   -:::::::::::::::::::::::::`                         
-echo                     .ooooooooooooooooooooooooo/   `:::::::::::::::::::::::::.                          
-echo                     /ooooooooooooooooooooooooo`   -:::::::::::::::::::::::::`                          
-echo                    -oooooo++++////++ooooooooo:   .:::::::::::::::::::::::::.                           
-echo                    +/:-..``         `.-/+ooo+`   :::::::::::::::::::::::::-                            
-echo                                          .-/-   .:::::::::::::::::::::::::`                            
-echo                                                `:::::::::::::::::::::::::-                             
-echo                                                 `.-:::::::::::::::::::::-`                             
-echo                                                   ´´ `..-:::::::::::--..`
+sleep 400 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.                                                                                        
+echo                                                                                               ```....```                                                     
+echo                                                                                         `.-:/++++++++++++/:-.                                                
+echo                                                                                       .+++++++++++++++++++++++:.                                             
+echo                                                                                       /+++++++++++++++++++++++++`                                            
+echo                                                                                      .+++++++++++++++++++++++++-   .:.                                       
+echo                                                                                      /+++++++++++++++++++++++++`   /++/:-.`            `..-:/                
+echo                                                                                     -+++++++++++++++++++++++++.   -++++++++//::---::///+++++-                
+echo                                                                                    `+++++++++++++++++++++++++/   `+++++++++++++++++++++++++/                 
+echo                                                                                    :+++++++++++++++++++++++++.   :+++++++++++++++++++++++++.                 
+echo                                                                                   .+++++++++++++++++++++++++:   .+++++++++++++++++++++++++:                  
+echo                                                                                   /+++++++++++++++++++++++++`   /+++++++++++++++++++++++++`                  
+echo                                                                                  -+++++++++++++++++++++++++-   -+++++++++++++++++++++++++-                   
+echo                                                                                 `/++///:-..`````..-:/+++++/   `/++++++++++++++++++++++++/`                   
+echo                                                                                 .-.``               ``-:/+.   :+++++++++++++++++++++++++.                    
+echo                                                                                   ...-:///+++//::-.`    `.   `+++++++++++++++++++++++++/                     
+echo                                                                                -:/+oooooooooooooooo+/:.`     ./++++++++++++++++++++++++.                     
+echo                                                                               .oooooooooooooooooooooooo+-     `.:/+++++++++++++++++//:.                      
+echo                                                                               +oooooooooooooooooooooooo+.`      ``.-::////////::-.``                         
+echo                                                                               -ooooooooooooooooooooooooo:   .::-.                    .:                       
+echo                                                                             `+oooooooooooooooooooooooo+`   :::::::--.::::::::...---::-                        
+echo                                                                             :ooooooooooooooooooooooooo-   .:::::::::::::::::::::::::`                        
+echo                                                                            `ooooooooooooooooooooooooo+   `:::::::::::::::::::::::::-                         
+echo                                                                            /ooooooooooooooooooooooooo.   -:::::::::::::::::::::::::`                         
+echo                                                                           .ooooooooooooooooooooooooo/   `:::::::::::::::::::::::::.                          
+echo                                                                           /ooooooooooooooooooooooooo`   -:::::::::::::::::::::::::`                          
+echo                                                                          -oooooo++++////++ooooooooo:   .:::::::::::::::::::::::::.                           
+echo                                                                          +/:-..``         `.-/+ooo+`   :::::::::::::::::::::::::-                            
+echo                                                                                                .-/-   .:::::::::::::::::::::::::`                            
+echo                                                                                                      `:::::::::::::::::::::::::-                             
+echo                                                                                                       `.-:::::::::::::::::::::-`                             
+echo                                                                                                           ..-:::::::::::--..`
 ::codigo para fazer o efeito de imagen piscando                                
 for /l %%i in (1 1 5) do (
 color 07
@@ -46,6 +56,157 @@ sleep 300
 color 01
 sleep 300 )
 color 07
+::
+:logar
+echo.
+echo.
+echo.
+echo.
+echo                                                                                            ====================                                                                                                                 
+echo                                                                                                [1-Entrar]   
+echo                                                                                               [2-Registar]  
+set /p log=*                                                                                         
+
+if %log% lss 1 (
+    if %som% equ 0 (
+        start /b gplay wrong.mp3>nul 2>nul
+    )
+    call pisca
+    goto :logar
+    echo
+)
+if %log% gtr 2 (
+    if %som% equ 0 (
+        start /b gplay wrong.mp3>nul 2>nul
+    )
+    call pisca
+    cls
+    goto :logar2
+    echo
+)
+if %log% equ 1 (
+    goto :entrar
+)
+if %log% equ 2 (
+    goto :registar
+)
+
+
+:logar2
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.                                                                                        
+echo                                                                                               ```....```                                                     
+echo                                                                                         `.-:/++++++++++++/:-.                                                
+echo                                                                                       .+++++++++++++++++++++++:.                                             
+echo                                                                                       /+++++++++++++++++++++++++`                                            
+echo                                                                                      .+++++++++++++++++++++++++-   .:.                                       
+echo                                                                                      /+++++++++++++++++++++++++`   /++/:-.`            `..-:/                
+echo                                                                                     -+++++++++++++++++++++++++.   -++++++++//::---::///+++++-                
+echo                                                                                    `+++++++++++++++++++++++++/   `+++++++++++++++++++++++++/                 
+echo                                                                                    :+++++++++++++++++++++++++.   :+++++++++++++++++++++++++.                 
+echo                                                                                   .+++++++++++++++++++++++++:   .+++++++++++++++++++++++++:                  
+echo                                                                                   /+++++++++++++++++++++++++`   /+++++++++++++++++++++++++`                  
+echo                                                                                  -+++++++++++++++++++++++++-   -+++++++++++++++++++++++++-                   
+echo                                                                                 `/++///:-..`````..-:/+++++/   `/++++++++++++++++++++++++/`                   
+echo                                                                                 .-.``               ``-:/+.   :+++++++++++++++++++++++++.                    
+echo                                                                                   ...-:///+++//::-.`    `.   `+++++++++++++++++++++++++/                     
+echo                                                                                -:/+oooooooooooooooo+/:.`     ./++++++++++++++++++++++++.                     
+echo                                                                               .oooooooooooooooooooooooo+-     `.:/+++++++++++++++++//:.                      
+echo                                                                               +oooooooooooooooooooooooo+.`      ``.-::////////::-.``                         
+echo                                                                               -ooooooooooooooooooooooooo:   .::-.                    .:                       
+echo                                                                             `+oooooooooooooooooooooooo+`   :::::::--.::::::::...---::-                        
+echo                                                                             :ooooooooooooooooooooooooo-   .:::::::::::::::::::::::::`                        
+echo                                                                            `ooooooooooooooooooooooooo+   `:::::::::::::::::::::::::-                         
+echo                                                                            /ooooooooooooooooooooooooo.   -:::::::::::::::::::::::::`                         
+echo                                                                           .ooooooooooooooooooooooooo/   `:::::::::::::::::::::::::.                          
+echo                                                                           /ooooooooooooooooooooooooo`   -:::::::::::::::::::::::::`                          
+echo                                                                          -oooooo++++////++ooooooooo:   .:::::::::::::::::::::::::.                           
+echo                                                                          +/:-..``         `.-/+ooo+`   :::::::::::::::::::::::::-                            
+echo                                                                                                .-/-   .:::::::::::::::::::::::::`                            
+echo                                                                                                      `:::::::::::::::::::::::::-                             
+echo                                                                                                       `.-:::::::::::::::::::::-`                             
+echo                                                                                                           ..-:::::::::::--..`
+echo.
+echo.
+echo.
+echo.
+echo                                                                                            ====================                                                                                                                 
+echo                                                                                                [1-Entrar]   
+echo                                                                                               [2-Registar]  
+set /p log=*                                                                                         
+
+if %log% lss 1 (
+    if %som% equ 0 (
+        start /b gplay wrong.mp3>nul 2>nul
+    )
+    call pisca
+    goto :logar
+    echo
+)
+if %log% gtr 2 (
+    if %som% equ 0 (
+        start /b gplay wrong.mp3>nul 2>nul
+    )
+    call pisca
+    cls
+    goto :logar2
+    echo
+)
+if %log% equ 1 (
+    goto :entrar
+)
+if %log% equ 2 (
+    goto :registar
+)
+
+::Entrar
+:entrar
+echo                                                                                    ===============================
+set /p user=*                                                                                       Username: 
+EditV64 -p "                                                                                        Password: " -m pass 
+if %user%==%admin1name% (
+    if %pass%==%admin1pass% (
+        goto :menu
+    ) else (
+        if exist %user%%pass%.txt (
+            goto :welcome
+            sleep 600
+            goto :menu
+        ) else (
+            call :pisca
+            cls
+            goto :logar2
+        )
+    )
+)
+if exist %user%%pass%.txt (
+    goto :welcome
+    sleep 600
+    goto :menu
+) else (
+    call :pisca
+    cls
+    goto :logar2
+)
+
+ 
+
+::Registar
+:registar
+echo                                                                                    ===============================
+set /p user=*                                                                                     Username: 
+EditV64 -p "                                                                                      Password: " -m pass 
+echo 0 >>%user%%pass%.txt
+echo *                                                                                    Conta criada com sucesso
+call :welcome
+
+
+
+
 ::#############################################
 :menu
 cls
@@ -69,9 +230,12 @@ if %op% == 3 (
    goto :terminal 
 )
 if %op% == 4 (
-		goto :def  
-)
+    goto :settings
+)        
 if %op% == 5 (
+    echo.
+    echo Adeus!
+    pause > nul
     exit    
 )
 if %op% gtr 5 (
@@ -272,7 +436,7 @@ if %opd% lss 1 (
     goto :def	
 )
 if %opd% == 1 (
-goto trocapass
+goto :trocapass
 )
 if %opd% == 2 (
 goto cor
@@ -345,4 +509,127 @@ if %opcor% gtr 4 (
     )
 	call :pisca
     goto :cor
+)
+::Sair
+:exit
+echo.
+echo Adeus!
+pause > nul
+exit
+
+
+:welcome
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.                                                                                        
+echo                                                                                               ```....```                                                     
+echo                                                                                         `.-:/++++++++++++/:-.                                                
+echo                                                                                       .+++++++++++++++++++++++:.                                             
+echo                                                                                       /+++++++++++++++++++++++++`                                            
+echo                                                                                      .+++++++++++++++++++++++++-   .:.                                       
+echo                                                                                      /+++++++++++++++++++++++++`   /++/:-.`            `..-:/                
+echo                                                                                     -+++++++++++++++++++++++++.   -++++++++//::---::///+++++-                
+echo                                                                                    `+++++++++++++++++++++++++/   `+++++++++++++++++++++++++/                 
+echo                                                                                    :+++++++++++++++++++++++++.   :+++++++++++++++++++++++++.                 
+echo                                                                                   .+++++++++++++++++++++++++:   .+++++++++++++++++++++++++:                  
+echo                                                                                   /+++++++++++++++++++++++++`   /+++++++++++++++++++++++++`                  
+echo                                                                                  -+++++++++++++++++++++++++-   -+++++++++++++++++++++++++-                   
+echo                                                                                 `/++///:-..`````..-:/+++++/   `/++++++++++++++++++++++++/`                   
+echo                                                                                 .-.``               ``-:/+.   :+++++++++++++++++++++++++.                    
+echo                                                                                   ...-:///+++//::-.`    `.   `+++++++++++++++++++++++++/                     
+echo                                                                                -:/+oooooooooooooooo+/:.`     ./++++++++++++++++++++++++.                     
+echo                                                                               .oooooooooooooooooooooooo+-     `.:/+++++++++++++++++//:.                      
+echo                                                                               +oooooooooooooooooooooooo+.`      ``.-::////////::-.``                         
+echo                                                                               -ooooooooooooooooooooooooo:   .::-.                    .:                       
+echo                                                                             `+oooooooooooooooooooooooo+`   :::::::--.::::::::...---::-                        
+echo                                                                             :ooooooooooooooooooooooooo-   .:::::::::::::::::::::::::`                        
+echo                                                                            `ooooooooooooooooooooooooo+   `:::::::::::::::::::::::::-                         
+echo                                                                            /ooooooooooooooooooooooooo.   -:::::::::::::::::::::::::`                         
+echo                                                                           .ooooooooooooooooooooooooo/   `:::::::::::::::::::::::::.                          
+echo                                                                           /ooooooooooooooooooooooooo`   -:::::::::::::::::::::::::`                          
+echo                                                                          -oooooo++++////++ooooooooo:   .:::::::::::::::::::::::::.                           
+echo                                                                          +/:-..``         `.-/+ooo+`   :::::::::::::::::::::::::-                            
+echo                                                                                                .-/-   .:::::::::::::::::::::::::`                            
+echo                                                                                                      `:::::::::::::::::::::::::-                             
+echo                                                                                                       `.-:::::::::::::::::::::-`                             
+echo                                                                                                           ..-:::::::::::--..`
+echo.
+echo.
+echo.
+echo.                                                                                                 
+echo                                                                                      ==============WELCOME==============     
+sleep 2000
+goto menu      
+
+
+:settings
+if %user% equ %admin1name% (
+    if %pass% equ %admin1pass% (
+        goto :def
+    ) else goto :permissao
+) else goto :permissao
+
+:permissao
+echo 1-[Continuar]
+echo 2-[Cancelar]
+set /p confirmacao=*
+if %confirmacao% equ 1 (
+    echo Insira dados administrador para prosseguir
+    set /p adminname=Username: 
+    EditV64 -p "Password: " -m adminpass
+    call :procura
+)
+if %confirmacao% equ 2 (
+    goto :menu
+) else goto :permissao
+
+
+
+:procura
+if %adminname% equ %admin1name% (
+    if %adminpass% equ %admin1pass% (
+        goto :def
+    ) else (
+        if exist %adminname%%adminpass%.txt (
+            echo Este usuario nao eh um administrador!
+            pause
+            goto :permissao
+        ) else (
+            echo Este usuaria nao existe!!
+            pause
+            goto:permissao
+        )
+    )
+) else (
+    if exist %adminname%%adminpass%.txt (
+        echo Este usuario nao eh um administrador!
+        pause
+        goto :permissao
+    ) else (
+        echo Este usuaria nao existe!!
+        pause
+        goto:permissao
+    )
+)
+
+
+:trocapass
+EditV64 -p "Insira a palavra passe atual: " -m oldpass
+if %oldpass% equ %pass% (
+    call :novo
+    goto :menu
+)
+:novo
+EditV64 -p "Insira a nova palavra passe: " -m newpass1
+EditV64 -p "Confirme a nova palavra passe: " -m newpass
+if %newpass% equ %newpass1% (
+    del %user%%pass%.txt
+    echo %user%%newpass%.txt
+    echo 0 >> %user%%newpass%.txt
+    echo Palavra passe mudada com sucesso!
+    pause > nul
 )

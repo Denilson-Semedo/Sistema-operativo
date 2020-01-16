@@ -1,4 +1,5 @@
 @echo off
+CHCP 1252
 pause > nul
 ::inicialização
 :inicio
@@ -36,8 +37,8 @@ echo                                                                            
 echo                                                                                -:/+oooooooooooooooo+/:.`     ./++++++++++++++++++++++++.                     
 echo                                                                               .oooooooooooooooooooooooo+-     `.:/+++++++++++++++++//:.                      
 echo                                                                               +oooooooooooooooooooooooo+.`      ``.-::////////::-.``                         
-echo                                                                               -ooooooooooooooooooooooooo:   .::-.                    .:                       
-echo                                                                             `+oooooooooooooooooooooooo+`   :::::::--.::::::::...---::-                        
+echo                                                                               -ooooooooooooooooooooooooo:   .::-.                    .:                      
+echo                                                                             `+oooooooooooooooooooooooo+`   :::::::--.::::::::...---::-                       
 echo                                                                             :ooooooooooooooooooooooooo-   .:::::::::::::::::::::::::`                        
 echo                                                                            `ooooooooooooooooooooooooo+   `:::::::::::::::::::::::::-                         
 echo                                                                            /ooooooooooooooooooooooooo.   -:::::::::::::::::::::::::`                         
@@ -145,7 +146,6 @@ if %log% lss 1 (
     )
     call pisca
     goto :logar
-    echo
 )
 if %log% gtr 2 (
     if %som% equ 0 (
@@ -154,7 +154,6 @@ if %log% gtr 2 (
     call pisca
     cls
     goto :logar2
-    echo
 )
 if %log% equ 1 (
     goto :entrar
@@ -197,11 +196,11 @@ if exist %user%%pass%.txt (
 
 ::Registar
 :registar
-echo                                                                                    ===============================
-set /p user=*                                                                                     Username: 
-EditV64 -p "                                                                                      Password: " -m pass 
+echo ===============================
+set /p user=*Username: 
+EditV64 -p "Password: " -m pass 
 echo 0 >>%user%%pass%.txt
-echo *                                                                                    Conta criada com sucesso
+echo *Conta criada com sucesso
 call :welcome
 
 
@@ -209,16 +208,17 @@ call :welcome
 
 ::#############################################
 :menu
+mode 44,30
 cls
-echo         _________________________
-echo                   MENU
-echo         -------------------------
-echo         [1] Gestao de processo
-echo         [2] Gestao de memoria 
-echo         [3] Terminal/Shell
-echo         [4] Definicoes(*)
-echo         _________
-echo         [5] Sair
+echo _________________________
+echo          MENU
+echo -------------------------
+echo [1] Gestão de processo
+echo [2] Gestão de memória 
+echo [3] Terminal/Shell
+echo [4] Definições(*)
+echo _________
+echo [5] Sair
 set /p op=         *
 if %op% == 1 (
     goto :gesprocessos
@@ -255,18 +255,19 @@ if %op% lss 1 (
 ::Gestao de Processos
 :gesprocessos
 cls
-echo         _____________________________
-echo              GESTAO DE PROCESSOS
-echo         -----------------------------
-echo         [1] Processos ativos
-echo         [2] Suspender Processos 
-echo         [3] Continuar um processo
-echo         [4] Matar um Processos
-echo         __________
-echo         [5] Voltar
-set /p op1=         * 
+echo _____________________________
+echo       GESTÃO DE PROCESSOS
+echo -----------------------------
+echo [1] Listar processos
+echo [2] Suspender Processos
+echo [3] Continuar um processo
+echo [4] Matar um Processo
+echo __________
+echo [5] Voltar
+set /p op1=* 
 if %op1% == 1 (
     ::Apresenta uma lista de processos ativos e depois encerra o processo inserido pelo utilizador
+    goto :subges
     TASKLIST /FI "STATUS EQ RUNNING"
     pause
     goto :gesprocessos
@@ -297,18 +298,71 @@ if %op1% lss 1 (
 	call :pisca
     goto :gesprocessos
 )
+:subges
+cls
+echo _____________________________
+echo       LISTAR PROCESSOS
+echo -----------------------------
+echo [1] Todos
+echo [2] Ativos
+echo [3] Suspensos
+echo [4] PID maior que 100
+echo [5] Memoria utilizada maior que 50000 kb
+echo __________
+echo [6] Voltar
+set /p opa=*
+if %opa% == 1 (
+TASKLIST 
+PAUSE > NUL
+goto :subges
+)
+
+if %opa% == 2 (
+TASKLIST /FI "STATUS EQ RUNNING"
+PAUSE > NUL
+goto :subges    
+)
+if %opa% == 3 (
+TASKLIST /FI "STATUS EQ SUSPENDED" 
+PAUSE > NUL
+goto :subges    
+)
+if %opa% == 4 (
+TASKLIST /FI "PID gt 100" 
+PAUSE > NUL
+goto :subges    
+)
+if %opa% == 5 (
+TASKLIST /FI "MEMUSAGE gt 50000" 
+PAUSE > NUL
+goto :subges    
+)
+if %opa% gtr 6 (
+	if %som%==0 (
+    start /b gplay wrong.mp3>nul 2>nul
+    )
+	call :pisca
+    goto :subges
+)
+if %opa% lss 1 (
+    if %som%==0 (
+    start /b gplay wrong.mp3>nul 2>nul
+    )
+	call :pisca
+    goto :subges
+)
 :gesmemoria
 ::Gestão de memória
 :meme
 cls
-echo         _________________________
-echo             GESTAO DE MEMORIA
-echo         -------------------------
-echo         [1] Total de memoria
-echo         [2] Memoria em uso 
-echo         [3] Memoria Disponivel
-echo         ___________
-echo         [4] Voltar 
+echo _________________________
+echo     GESTÃO DE MEMÓRIA
+echo -------------------------
+echo [1] Total de memória
+echo [2] Memória em uso 
+echo [3] Memória Disponível
+echo ___________
+echo [4] Voltar 
 set /p op2=         * 
 
 if %op2% == 1 (
@@ -342,47 +396,47 @@ if %op2% lss 1 (
 )
 ::Memoria Total
 :memoriatotal
-echo         _________________________
-echo             GESTAO DE MEMORIA
-echo         -------------------------
+echo _________________________
+echo    GESTÃO DE MEMÓRIA
+echo -------------------------
 echo.
 ::Utilizamos o ciclo for pra extrair os dados necessarios no comando "Systeminfo"
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Memory"') do set RAM_SIZE=%%i%%j
-echo         [Memoria total]: %RAM_SIZE%
+echo [Memória total]: %RAM_SIZE%
 pause > nul
 goto :gesmemoria
 ::Memoria Em uso
 :memoriadisponivel
-echo         _________________________
-echo             GESTAO DE MEMORIA
-echo         -------------------------
+echo _________________________
+echo     GESTÃO DE MEMÓRIA
+echo -------------------------
 echo.
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
-echo         [Memoria disponivel]: %RAM_DIS%
+echo [Memória disponível]: %RAM_DIS%
 pause > nul
 goto :gesmemoria
 ::Memoria Disponivel
 :memoriaemuso
-echo         _________________________
-echo             GESTAO DE MEMORIA
-echo         -------------------------
+echo _________________________
+echo     GESTÃO DE MEMÓRIA
+echo -------------------------
 echo.
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Memory"') do set RAM_SIZE=%%i%%j
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
 set /a RAM_USE=RAM_SIZE-RAM_DIS
-echo         [Memoria em uso]: %RAM_USE%
+echo [Memória em uso]: %RAM_USE%
 pause > nul
 goto :gesmemoria
 ::Terminal
 :terminal
     cls
-    echo         _____________________
-    echo               TERMINAIS
-    echo         ---------------------
-    echo         [1] Powershell(*)
-    echo         [2] Terminal do cmd
-    echo         ___________
-    echo         [3] Voltar
+    echo _____________________
+    echo       TERMINAIS
+    echo ---------------------
+    echo [1] Powershell(*)
+    echo [2] Terminal do cmd
+    echo ___________
+    echo [3] Voltar
     set /p opp=         *
     if %opp% == 1 (
         cls
@@ -414,19 +468,20 @@ goto :gesmemoria
 ::Definicões onde somente o administrador tem acesso
 :def
 cls
-echo         ______________________
-echo              DEFINICOES
-echo         ----------------------
-echo         [1] Trocar Password
-echo         [2] Mudar Cor
+echo ______________________
+echo       DEFINIÇÕES
+echo ----------------------
+echo [1] Trocar Password
+echo [2] Mudar Cor
 if %som% == 0 (
-    echo         [3] Desativar som    
+    echo [3] Desativar som    
 )
 if %som% == 1 (
-    echo         [3] Ativar som   
+    echo [3] Ativar som   
 )
-echo         ___________ 
-echo         [4] Voltar
+echo [4] Eliminar Conta
+echo ___________ 
+echo [5] Voltar
 set /p opd=         *
 if %opd% lss 1 (
 	if %som%==0 (
@@ -449,11 +504,14 @@ if %opd% == 3 (
         set /a som=1
     )
     goto def
-) 
+)
 if %opd% == 4 (
+goto eliminar
+) 
+if %opd% == 5 (
 goto menu
 )
-if %opd% gtr 4 (
+if %opd% gtr 5 (
 	if %som%==0 (
     start /b gplay wrong.mp3>nul 2>nul
     )
@@ -472,14 +530,15 @@ color 0A
 exit /b
 :cor
 cls
-echo         _________________
-echo               MODOS
-echo         -----------------
-echo         [1] Padrao
-echo         [2] Modo Nocturno
-echo         [3] Modo Hacker
-echo         ___________
-echo         [4] Voltar
+echo _________________
+echo       MODOS
+echo -----------------
+echo [1] Padrão
+echo [2] Modo Nocturno
+echo [3] Modo Hacker
+echo [4] Shacks mode
+echo ___________
+echo [5] Voltar
 set /p opcor=         *
 if %opcor% == 1 (
 color 70
@@ -494,6 +553,10 @@ color 0a
 goto cor
 )
 if %opcor% == 4 (
+color 7d
+goto cor
+)
+if %opcor% == 5 (
 goto def
 )
 if %opcor% lss 1(
@@ -503,7 +566,7 @@ if %opcor% lss 1(
 	call :pisca
     goto :cor
 )
-if %opcor% gtr 4 (
+if %opcor% gtr 5 (
     if %som%==0 (
     start /b gplay wrong.mp3>nul 2>nul
     )
@@ -595,22 +658,22 @@ if %adminname% equ %admin1name% (
         goto :def
     ) else (
         if exist %adminname%%adminpass%.txt (
-            echo Este usuario nao eh um administrador!
+            echo Este usuario nao é um administrador!
             pause
             goto :permissao
         ) else (
-            echo Este usuaria nao existe!!
+            echo Este usuario não existe!!
             pause
             goto:permissao
         )
     )
 ) else (
     if exist %adminname%%adminpass%.txt (
-        echo Este usuario nao eh um administrador!
+        echo Este usuario não é um administrador!
         pause
         goto :permissao
     ) else (
-        echo Este usuaria nao existe!!
+        echo Este usuario não existe!!
         pause
         goto:permissao
     )
@@ -633,3 +696,23 @@ if %newpass% equ %newpass1% (
     echo Palavra passe mudada com sucesso!
     pause > nul
 )
+:eliminar
+cls 
+echo ____________________
+echo    ELIMINAR CONTA
+echo --------------------
+echo Insira os dados da conta que desejas eliminar
+set /p conta=User:
+EditV64 -p "Password: " -m codigo
+
+if exist %conta%%codigo%.txt (
+del %conta%%codigo%.txt
+echo Conta eliminada com sucesso
+pause > nul
+goto def
+) else (
+echo Dados introduzido incorretamente!
+call pisca
+pause > nul
+goto eliminar
+)       

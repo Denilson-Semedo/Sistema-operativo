@@ -140,6 +140,7 @@ echo         _________
 echo         [5] Sair
 set /p op=         *
 if %op% == 1 (
+    pssuspend -r <notepad.exe>
     goto :gesprocessos
 )
 if %op% == 2 (

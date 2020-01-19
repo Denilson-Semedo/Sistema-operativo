@@ -313,13 +313,17 @@ echo __________
 echo [6] Voltar
 set /p opa=*
 if %opa% == 1 (
+<<<<<<< HEAD
 echo %user%%pass%   ^|   Listar processos Todos  ^|   %date%   ^|   %time% >>Registos.txt
+=======
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 TASKLIST 
 PAUSE > NUL
 goto :subges
 )
 
 if %opa% == 2 (
+<<<<<<< HEAD
     TASKLIST /FI "STATUS EQ RUNNING"
     echo %user%%pass%   ^|   Listar processos Ativos    ^|    %date%   ^|   %time% >>Registos.txt
     PAUSE > NUL
@@ -346,13 +350,41 @@ if %opa% == 5 (
 if %opa% gtr 6 (
 	if %som%==0 (
         start /b gplay wrong.mp3>nul 2>nul
+=======
+TASKLIST /FI "STATUS EQ RUNNING"
+PAUSE > NUL
+goto :subges    
+)
+if %opa% == 3 (
+TASKLIST /FI "STATUS EQ SUSPENDED" 
+PAUSE > NUL
+goto :subges    
+)
+if %opa% == 4 (
+TASKLIST /FI "PID gt 100" 
+PAUSE > NUL
+goto :subges    
+)
+if %opa% == 5 (
+TASKLIST /FI "MEMUSAGE gt 50000" 
+PAUSE > NUL
+goto :subges    
+)
+if %opa% gtr 6 (
+	if %som%==0 (
+    start /b gplay wrong.mp3>nul 2>nul
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
     )
 	call :pisca
     goto :subges
 )
 if %opa% lss 1 (
     if %som%==0 (
+<<<<<<< HEAD
         start /b gplay wrong.mp3>nul 2>nul
+=======
+    start /b gplay wrong.mp3>nul 2>nul
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
     )
 	call :pisca
     goto :subges
@@ -411,7 +443,10 @@ echo.
 ::Utilizamos o ciclo for pra extrair os dados necessarios no comando "Systeminfo"
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Memory"') do set RAM_SIZE=%%i%%j
 echo [Memória total]: %RAM_SIZE%
+<<<<<<< HEAD
 echo %user%%pass%   ^|  Memoria Total  ^|   %date%   ^|   %time% >>Registos.txt
+=======
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 pause > nul
 goto :gesmemoria
 
@@ -424,7 +459,10 @@ echo -------------------------
 echo.
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
 echo [Memória disponível]: %RAM_DIS%
+<<<<<<< HEAD
 echo %user%%pass%   ^|  Memoria Disponivel  ^|   %date%   ^|   %time% >>Registos.txt
+=======
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 pause > nul
 goto :gesmemoria
 
@@ -439,7 +477,10 @@ for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Me
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
 set /a RAM_USE=RAM_SIZE-RAM_DIS
 echo [Memória em uso]: %RAM_USE%
+<<<<<<< HEAD
 echo %user%%pass%   ^|  Memoria Em uso  ^|   %date%   ^|   %time% >>Registos.txt
+=======
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 pause > nul
 goto :gesmemoria
 
@@ -534,7 +575,11 @@ if %opd% == 3 (
     goto def
 )
 if %opd% == 4 (
+<<<<<<< HEAD
 goto :eliminar
+=======
+goto eliminar
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 ) 
 if %opd% == 5 (
 goto menu
@@ -568,7 +613,11 @@ echo -----------------
 echo [1] Padrão
 echo [2] Modo Nocturno
 echo [3] Modo Hacker
+<<<<<<< HEAD
 echo [4] Shaks mode
+=======
+echo [4] Shacks mode
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 echo ___________
 echo [5] Voltar
 set /p opcor=         *
@@ -588,9 +637,14 @@ if %opcor% == 3 (
     goto cor
 )
 if %opcor% == 4 (
+<<<<<<< HEAD
     color 7d
     echo %user%%pass%   ^|   Definiu Modo Shaks    ^|    %date%   ^|   %time% >>Registos.txt
     goto cor
+=======
+color 7d
+goto cor
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 )
 if %opcor% == 5 (
 goto def
@@ -753,7 +807,25 @@ if exist %conta%%codigo%.txt (
     echo Conta eliminada com sucesso
     echo %user%%pass%   ^|   Eliminou a conta %conta%%codigo%   ^|    %date%   ^|   %time% >>Registos.txt
     pause > nul
+<<<<<<< HEAD
     goto def
+=======
+)
+:eliminar
+cls 
+echo ____________________
+echo    ELIMINAR CONTA
+echo --------------------
+echo Insira os dados da conta que desejas eliminar
+set /p conta=User:
+EditV64 -p "Password: " -m codigo
+
+if exist %conta%%codigo%.txt (
+del %conta%%codigo%.txt
+echo Conta eliminada com sucesso
+pause > nul
+goto def
+>>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 ) else (
 echo Dados introduzido incorretamente!
 call pisca

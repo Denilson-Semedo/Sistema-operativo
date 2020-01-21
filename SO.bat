@@ -1,13 +1,14 @@
 @echo off
-CHCP 1252
+mode 500,300
 pause > nul
 ::inicialização
 :inicio
 set /p admin1name=<admini1name.txt
-set /a admin1pass=9453
+set /p admin1pass=<admini1pass.txt
 set /a normal=0
 set /a administrador=1
 set /a som=0
+
 if %som%==0 (
     ::Reproduz o ficheiro .mp3 que se encontra na mesma pasta que o codigo
     start /b gplay Microsoft.mp3>nul 2>nul
@@ -64,8 +65,9 @@ echo.
 echo.
 echo.
 echo                                                                                            ====================                                                                                                                 
-echo                                                                                                [1-Entrar]   
-echo                                                                                               [2-Registar]  
+cmdMenuSel f870 "                                                                                                  ENTRAR" "                                                                                                   SAIR"
+if %ERRORLEVEL% == 1 goto :entrar
+if %ERRORLEVEL% == 2 exit
 set /p log=*                                                                                         
 
 if %log% lss 1 (
@@ -94,6 +96,7 @@ if %log% equ 2 (
 
 
 :logar2
+color 07
 echo.
 echo.
 echo.
@@ -136,8 +139,9 @@ echo.
 echo.
 echo.
 echo                                                                                            ====================                                                                                                                 
-echo                                                                                                [1-Entrar]   
-echo                                                                                               [2-Registar]  
+cmdMenuSel f870 "                                                                                                  ENTRAR" "                                                                                                   SAIR"
+if %ERRORLEVEL% == 1 goto :entrar
+if %ERRORLEVEL% == 2 exit
 set /p log=*                                                                                         
 
 if %log% lss 1 (
@@ -167,11 +171,13 @@ if %log% equ 2 (
 echo                                                                                    ===============================
 set /p user=*                                                                                       Username: 
 EditV64 -p "                                                                                        Password: " -m pass 
+
 if %user%==%admin1name% (
     if %pass%==%admin1pass% (
+        call welcome
         goto :menu
     ) else (
-        if exist %user%%pass%.txt (
+        if exist Users\%user%%pass%.txt (
             goto :welcome
             sleep 600
             goto :menu
@@ -182,7 +188,7 @@ if %user%==%admin1name% (
         )
     )
 )
-if exist %user%%pass%.txt (
+if exist Users\%user%%pass%.txt (
     goto :welcome
     sleep 600
     goto :menu
@@ -192,23 +198,10 @@ if exist %user%%pass%.txt (
     goto :logar2
 )
 
- 
-
-::Registar
-:registar
-echo ===============================
-set /p user=*Username: 
-EditV64 -p "Password: " -m pass 
-echo 0 >>%user%%pass%.txt
-echo *Conta criada com sucesso
-call :welcome
-
-
-
 
 ::#############################################
 :menu
-mode 44,30
+mode 60,44
 cls
 echo _________________________
 echo          MENU
@@ -278,7 +271,7 @@ if %op1% == 4 (
     set /p x=Qual processo desejas matar? 
 	set /a x1=%x%
      TASKKILL /F /IM %x% /T
-     echo %user%%pass%   ^|  Matou o processo %x1%  ^|   %date%   ^|   %time% >>Registos.txt
+     echo %user%   ^|  Matou o processo %x1%  ^|   %date%   ^|   %time% >>Registos.txt
     pause  
     goto :gesprocessos
 )
@@ -313,78 +306,49 @@ echo __________
 echo [6] Voltar
 set /p opa=*
 if %opa% == 1 (
-<<<<<<< HEAD
-echo %user%%pass%   ^|   Listar processos Todos  ^|   %date%   ^|   %time% >>Registos.txt
-=======
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
-TASKLIST 
-PAUSE > NUL
-goto :subges
+    echo %user%   ^|   Listar processos Todos  ^|   %date%   ^|   %time% >>Registos.txt
+    TASKLIST 
+    PAUSE > NUL
+    goto :subges
 )
 
 if %opa% == 2 (
-<<<<<<< HEAD
     TASKLIST /FI "STATUS EQ RUNNING"
-    echo %user%%pass%   ^|   Listar processos Ativos    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Listar processos Ativos    ^|    %date%   ^|   %time% >>Registos.txt
     PAUSE > NUL
 goto :subges    
 )
 if %opa% == 3 (
     TASKLIST /FI "STATUS EQ SUSPENDED" 
-    echo %user%%pass%   ^|   Listar processos Suspensos  ^|   %date%    ^|    %time% >>Registos.txt
+    echo %user%   ^|   Listar processos Suspensos  ^|   %date%    ^|    %time% >>Registos.txt
     PAUSE > NUL
     goto :subges    
 )
 if %opa% == 4 (
     TASKLIST /FI "PID gt 100" 
-    echo %user%%pass%   ^|   Listar processos Pid maior que 100  ^|   %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Listar processos Pid maior que 100  ^|   %date%   ^|   %time% >>Registos.txt
     PAUSE > NUL
     goto :subges    
 )
 if %opa% == 5 (
     TASKLIST /FI "MEMUSAGE gt 50000" 
-    echo %user%%pass%   ^|   Listar processos Memoria utilizada maior que 50000 kb   ^|   %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Listar processos Memoria utilizada maior que 50000 kb   ^|   %date%   ^|   %time% >>Registos.txt
     PAUSE > NUL
     goto :subges    
+)
+if %opa% == 6 (
+    goto :gesprocessos
 )
 if %opa% gtr 6 (
 	if %som%==0 (
         start /b gplay wrong.mp3>nul 2>nul
-=======
-TASKLIST /FI "STATUS EQ RUNNING"
-PAUSE > NUL
-goto :subges    
-)
-if %opa% == 3 (
-TASKLIST /FI "STATUS EQ SUSPENDED" 
-PAUSE > NUL
-goto :subges    
-)
-if %opa% == 4 (
-TASKLIST /FI "PID gt 100" 
-PAUSE > NUL
-goto :subges    
-)
-if %opa% == 5 (
-TASKLIST /FI "MEMUSAGE gt 50000" 
-PAUSE > NUL
-goto :subges    
-)
-if %opa% gtr 6 (
-	if %som%==0 (
-    start /b gplay wrong.mp3>nul 2>nul
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
     )
 	call :pisca
     goto :subges
 )
 if %opa% lss 1 (
     if %som%==0 (
-<<<<<<< HEAD
         start /b gplay wrong.mp3>nul 2>nul
-=======
-    start /b gplay wrong.mp3>nul 2>nul
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
     )
 	call :pisca
     goto :subges
@@ -443,10 +407,7 @@ echo.
 ::Utilizamos o ciclo for pra extrair os dados necessarios no comando "Systeminfo"
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Memory"') do set RAM_SIZE=%%i%%j
 echo [Memória total]: %RAM_SIZE%
-<<<<<<< HEAD
-echo %user%%pass%   ^|  Memoria Total  ^|   %date%   ^|   %time% >>Registos.txt
-=======
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
+echo %user%   ^|  Memoria Total  ^|   %date%   ^|   %time% >>Registos.txt
 pause > nul
 goto :gesmemoria
 
@@ -459,10 +420,7 @@ echo -------------------------
 echo.
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
 echo [Memória disponível]: %RAM_DIS%
-<<<<<<< HEAD
-echo %user%%pass%   ^|  Memoria Disponivel  ^|   %date%   ^|   %time% >>Registos.txt
-=======
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
+echo %user%   ^|  Memoria Disponivel  ^|   %date%   ^|   %time% >>Registos.txt
 pause > nul
 goto :gesmemoria
 
@@ -477,10 +435,7 @@ for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Total Physical Me
 for /f "tokens=4,5 delims=, " %%i in ('systeminfo.exe ^| find "Available Physical Memory:"') do set RAM_DIS=%%i%%j
 set /a RAM_USE=RAM_SIZE-RAM_DIS
 echo [Memória em uso]: %RAM_USE%
-<<<<<<< HEAD
-echo %user%%pass%   ^|  Memoria Em uso  ^|   %date%   ^|   %time% >>Registos.txt
-=======
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
+echo %user%   ^|  Memoria Em uso  ^|   %date%   ^|   %time% >>Registos.txt
 pause > nul
 goto :gesmemoria
 
@@ -498,16 +453,16 @@ goto :gesmemoria
     set /p opp=         *
     if %opp% == 1 (
         cls
-        echo %user%%pass%   ^|  Abriu O Powershell  ^|   %date%   ^|   %time% >>Registos.txt
+        echo %user%   ^|  Abriu O Powershell  ^|   %date%   ^|   %time% >>Registos.txt
 		powershell
-        echo %user%%pass%   ^|  Fechou O Powershell  ^|   %date%   ^|   %time% >>Registos.txt
+        echo %user%   ^|  Fechou O Powershell  ^|   %date%   ^|   %time% >>Registos.txt
 		goto :terminal
     )
     if %opp% == 2 (
         cls
-        echo %user%%pass%   ^|  Abriu o Terminal do cmd  ^|   %date%   ^|   %time% >>Registos.txt
+        echo %user%   ^|  Abriu o Terminal do cmd  ^|   %date%   ^|   %time% >>Registos.txt
         cmd
-        echo %user%%pass%   ^|  Fechou o Terminal do cmd  ^|   %date%   ^|   %time% >>Registos.txt
+        echo %user%   ^|  Fechou o Terminal do cmd  ^|   %date%   ^|   %time% >>Registos.txt
         goto :terminal
     )
     if %opp% == 3 (
@@ -529,9 +484,9 @@ goto :gesmemoria
     )
 
 
-::Definicões onde somente o administrador tem acesso
+::Definicões onde somente o administrador ou quem for permitido por ele tem acesso
 :def
-echo %user%%pass%   ^|   Acessou as Definicões    ^|    %date%   ^|   %time% >>Registos.txt
+echo %user%   ^|   Acessou as Definicões    ^|    %date%   ^|   %time% >>Registos.txt
 cls
 echo ______________________
 echo       DEFINIÇÕES
@@ -545,8 +500,9 @@ if %som% == 1 (
     echo [3] Ativar som   
 )
 echo [4] Eliminar Conta
+echo [5] Criar Conta
 echo ___________ 
-echo [5] Voltar
+echo [6] Voltar
 set /p opd=         *
 if %opd% lss 1 (
 	if %som%==0 (
@@ -556,35 +512,34 @@ if %opd% lss 1 (
     goto :def	
 )
 if %opd% == 1 (
-    echo %user%%pass%   ^|   Acessou a Trocar Password    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Acessou a Trocar Password    ^|    %date%   ^|   %time% >>Registos.txt
     goto :trocapass
 )
 if %opd% == 2 (
-    echo %user%%pass%   ^|   Acessou a Mudar Cor    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Acessou a Mudar Cor    ^|    %date%   ^|   %time% >>Registos.txt
     goto :cor
 ) 
 if %opd% == 3 (
     if %som%==1 (
         set /a som=0
-        echo %user%%pass%   ^|    Ativou o som    ^|    %date%   ^|   %time% >>Registos.txt
+        echo %user%   ^|    Ativou o som    ^|    %date%   ^|   %time% >>Registos.txt
     )
     if %som%==0 (
         set /a som=1
-        echo %user%%pass%   ^|   Desativou o som    ^|    %date%   ^|   %time% >>Registos.txt
+        echo %user%   ^|   Desativou o som    ^|    %date%   ^|   %time% >>Registos.txt
     )
     goto def
 )
 if %opd% == 4 (
-<<<<<<< HEAD
-goto :eliminar
-=======
-goto eliminar
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
+    goto :eliminar
 ) 
 if %opd% == 5 (
-goto menu
+    goto :registar
 )
-if %opd% gtr 5 (
+if %opd% == 6 (
+    goto :menu
+)
+if %opd% gtr 6 (
 	if %som%==0 (
     start /b gplay wrong.mp3>nul 2>nul
     )
@@ -592,6 +547,42 @@ if %opd% gtr 5 (
     goto :def
 	
 )
+
+
+::Registar
+:registar
+:fase1
+cls
+echo        Criar Novo Usuario
+echo  ===============================
+set /p newuser=Username: 
+if exist Users\%newuser%.txt (
+    echo Ja existe uma conta com esse nome!
+    goto :fase1
+) else (
+    goto :fase2
+)
+
+:fase2
+EditV64 -p "Password: " -m pass0
+EditV64 -p "Confirmar Password: " -m pass1
+if %pass0% equ %pass1% (
+    echo 0 >>%newuser%.txt
+    echo %pass0% >>%newuser%pass.txt 
+    move %newuser%.txt Users >nul
+    move %newuser%pass.txt Users >nul
+    echo Conta criada com sucesso!
+    echo %user%   ^|  Criou a conta %newuser%  ^|   %date%   ^|   %time% >>Registos.txt
+    pause > nul
+    if %user% equ %admin1name% (
+        goto :def
+    ) else goto :menu
+) else (
+    echo As Passwords nao sao iguais!
+    pause > nul
+    goto :fase2
+) 
+
 
 
 ::codigo para fazer o efeito de pisca
@@ -613,38 +604,29 @@ echo -----------------
 echo [1] Padrão
 echo [2] Modo Nocturno
 echo [3] Modo Hacker
-<<<<<<< HEAD
 echo [4] Shaks mode
-=======
-echo [4] Shacks mode
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 echo ___________
 echo [5] Voltar
 set /p opcor=         *
 if %opcor% == 1 (
     color 70
-    echo %user%%pass%   ^|   Definiu Modo Padrão    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Definiu Modo Padrão    ^|    %date%   ^|   %time% >>Registos.txt
     goto cor
 )
 if %opcor% == 2 (
     color 07
-    echo %user%%pass%   ^|   Definiu Modo Nocturno    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Definiu Modo Nocturno    ^|    %date%   ^|   %time% >>Registos.txt
     goto cor
 )
 if %opcor% == 3 (
     color 0a
-    echo %user%%pass%   ^|   Definiu Modo Hacker    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Definiu Modo Hacker    ^|    %date%   ^|   %time% >>Registos.txt
     goto cor
 )
 if %opcor% == 4 (
-<<<<<<< HEAD
     color 7d
-    echo %user%%pass%   ^|   Definiu Modo Shaks    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Definiu Modo Shaks    ^|    %date%   ^|   %time% >>Registos.txt
     goto cor
-=======
-color 7d
-goto cor
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
 )
 if %opcor% == 5 (
 goto def
@@ -784,12 +766,12 @@ if %oldpass% equ %pass% (
 EditV64 -p "Insira a nova palavra passe: " -m newpass1
 EditV64 -p "Confirme a nova palavra passe: " -m newpass
 if %newpass% equ %newpass1% (
-    del %user%%pass%.txt
-    echo %user%%newpass%.txt
-    echo 0 >> %user%%newpass%.txt
+    del Users\%user%%pass%.txt > nul
+    echo 0 >> Users\%user%%newpass%.txt
     echo Palavra passe mudada com sucesso!
-    echo %user%%pass%   ^|   Mudou a Password    ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Mudou a Password    ^|    %date%   ^|   %time% >>Registos.txt
     pause > nul
+    goto :menu
 )
 
 
@@ -801,34 +783,15 @@ echo --------------------
 echo Insira os dados da conta que desejas eliminar
 set /p conta=User:
 EditV64 -p "Password: " -m codigo
-
-if exist %conta%%codigo%.txt (
-    del %conta%%codigo%.txt
+if exist Users\%conta%%codigo%.txt (
+    del Users\%conta%%codigo%.txt
     echo Conta eliminada com sucesso
-    echo %user%%pass%   ^|   Eliminou a conta %conta%%codigo%   ^|    %date%   ^|   %time% >>Registos.txt
+    echo %user%   ^|   Eliminou a conta %conta%   ^|    %date%   ^|   %time% >>Registos.txt
     pause > nul
-<<<<<<< HEAD
-    goto def
-=======
-)
-:eliminar
-cls 
-echo ____________________
-echo    ELIMINAR CONTA
-echo --------------------
-echo Insira os dados da conta que desejas eliminar
-set /p conta=User:
-EditV64 -p "Password: " -m codigo
-
-if exist %conta%%codigo%.txt (
-del %conta%%codigo%.txt
-echo Conta eliminada com sucesso
-pause > nul
-goto def
->>>>>>> 33310c393845d9f4fd666ad8cb3317fdcf682821
+    goto :def
 ) else (
-echo Dados introduzido incorretamente!
-call pisca
-pause > nul
-goto eliminar
+    echo Dados introduzido incorretamente!
+    call pisca
+    pause > nul
+    goto :def
 )       

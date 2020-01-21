@@ -1,0 +1,20 @@
+Denilson   |   Acessou as Definicões    |    Sun 01/19/2020   |   14:25:33.26 
+Denilson   |   Acessou a Trocar Password    |    Sun 01/19/2020   |   14:25:35.85 
+Denilson   |   Mudou a Password    |    Sun 01/19/2020   |   14:25:53.64 
+Luis   |   Acessou as Definicões    |    Sun 01/19/2020   |   17:26:49.11 
+Luis   |   Eliminou a conta Denilson   |    Sun 01/19/2020   |   17:27:16.96 
+Luis   |   Acessou as Definicões    |    Sun 01/19/2020   |   17:27:18.45 
+Luis   |   Eliminou a conta Raca   |    Sun 01/19/2020   |   17:27:29.16 
+Luis   |   Acessou as Definicões    |    Sun 01/19/2020   |   17:27:30.03 
+Luis   |   Acessou as Definicões    |    Sun 01/19/2020   |   17:27:47.66 
+Luis   |   Acessou as Definicões    |    Sun 01/19/2020   |   18:00:35.78 
+Luis   |   Listar processos Todos  |   Sun 01/19/2020   |   18:01:37.77 
+Luis   |   Listar processos Ativos    |    Sun 01/19/2020   |   18:01:56.50 
+Luis   |   Listar processos Suspensos  |   Sun 01/19/2020    |    18:02:28.05 
+Luis   |  Matou o processo   |   Sun 01/19/2020   |   18:03:19.64 
+Luis   |  Matou o processo   |   Sun 01/19/2020   |   18:03:44.37 
+Luis   |   Acessou as Definicões    |    Sun 01/19/2020   |   18:06:52.96 
+Luis   |   Acessou as Definicões    |    Tue 01/21/2020   |   11:48:47.30 
+Luis   |  Criou a conta Denilson  |   Tue 01/21/2020   |   11:49:04.50 
+Luis   |   Acessou as Definicões    |    Tue 01/21/2020   |   11:49:06.32 
+Luis   |  Memoria Total  |   Tue 01/21/2020   |   11:49:17.33 
